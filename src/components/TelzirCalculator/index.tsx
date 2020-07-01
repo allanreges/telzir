@@ -43,44 +43,38 @@ const TelzirCalculator: React.FC = () => {
   }, []);
 
   const listOfPlans = useMemo(() => {
-    if (plans) {
-      const listPlans = plans.map(plan => {
-        return { value: plan.id, label: plan.label };
-      });
+    const listPlans = plans.map(plan => {
+      return { value: plan.id, label: plan.label };
+    });
 
-      return listPlans;
-    }
+    return listPlans;
   }, [plans]);
 
   const possibleDestinations = useMemo(() => {
-    if (combinations) {
-      const possibleMatches = combinations
-        .filter(item => item.origin === activePlan.origin)
-        .map(destination => {
-          return { value: destination.destiny, label: destination.destiny };
-        });
+    const possibleMatches = combinations
+      .filter(item => item.origin === activePlan.origin)
+      .map(destination => {
+        return { value: destination.destiny, label: destination.destiny };
+      });
 
-      return possibleMatches;
-    }
+    return possibleMatches;
   }, [activePlan.origin]);
 
   const origins = useMemo(() => {
-    if (combinations) {
-      const set = new Set();
-      const possibleMatches = combinations
-        .map(destination => {
-          return { value: destination.origin, label: destination.origin };
-        })
-        .filter(item => {
-          if (!set.has(item.label)) {
-            set.add(item.label);
-            return true;
-          }
-          return false;
-        }, set);
+    const set = new Set();
+    const possibleMatches = combinations
+      .map(destination => {
+        return { value: destination.origin, label: destination.origin };
+      })
+      .filter(item => {
+        if (!set.has(item.label)) {
+          set.add(item.label);
+          return true;
+        }
+        return false;
+      }, set);
 
-      return possibleMatches;
-    }
+    return possibleMatches;
   }, [combinations]);
 
   const handleFindPlan = async (data: ActivePlan) => {
