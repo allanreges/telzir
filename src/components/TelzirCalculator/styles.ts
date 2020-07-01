@@ -3,12 +3,15 @@ import { Form } from '@unform/web';
 
 export const Container = styled.div`
   display: flex;
-  margin: 30px 0;
   flex-direction: column;
   align-items: center;
   background: #f5f5f5;
   padding: 30px 20px;
   border-radius: 10px;
+
+  @media (min-width: 720px) {
+    margin: 30px 0;
+  }
 `;
 
 export const Title = styled.h1`
